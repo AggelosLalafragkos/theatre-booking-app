@@ -14,6 +14,7 @@ exports.register = async (req, res) => {
         conn.release();
         res.status(201).json({ message: 'User registered successfully' });
     } catch (err) {
+        console.error('Register error:', err.message);
         res.status(500).json({ message: 'Error registering user', error: err.message });
     }
 };

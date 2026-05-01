@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import API from '../../api';
 
@@ -13,11 +13,11 @@ export default function BookingScreen() {
 
     const handleBooking = async () => {
         if (!tickets || parseInt(tickets) < 1) {
-            window.alert('Παρακαλώ βάλε έγκυρο αριθμό εισιτηρίων');
+            Alert.alert('Σφάλμα', 'Παρακαλώ βάλε έγκυρο αριθμό εισιτηρίων');
             return;
         }
         if (parseInt(tickets) > parseInt(availableSeats)) {
-            window.alert(`Μέγιστος αριθμός διαθέσιμων θέσεων: ${availableSeats}`);
+            Alert.alert('Σφάλμα', `Μέγιστος αριθμός διαθέσιμων θέσεων: ${availableSeats}`);
             return;
         }
         try {
@@ -25,10 +25,13 @@ export default function BookingScreen() {
                 showtime_id: parseInt(showtimeId),
                 tickets: parseInt(tickets)
             });
-            window.alert(`Η κράτησή σας για "${showTitle}" καταχωρήθηκε!\nΣύνολο: €${totalPrice}`);
-            navigation.navigate('Theatres');
+            navigation.navigate('Profile');
+            Alert.alert(
+                'Επιτυχία!',
+                `Η κράτησή σας για "${showTitle}" καταχωρήθηκε!\nΣύνολο: €${totalPrice}`
+            );
         } catch {
-            window.alert('Αποτυχία κράτησης');
+            Alert.alert('Σφάλμα', 'Αποτυχία κράτησης');
         }
     };
 

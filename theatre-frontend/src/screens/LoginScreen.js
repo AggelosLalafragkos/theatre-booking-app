@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, Alert, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import API from '../../api';
 
 export default function LoginScreen() {
@@ -11,7 +12,7 @@ export default function LoginScreen() {
     const handleLogin = async () => {
         try {
             const res = await API.post('/login', { email, password });
-            localStorage.setItem('token', res.data.token);
+            await AsyncStorage.setItem('token', res.data.token);
             navigation.replace('Theatres');
         } catch (err) {
             Alert.alert('Σφάλμα', 'Λάθος email ή password');

@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { View, Text, FlatList, TouchableOpacity, StyleSheet, Alert } from 'react-native';
-import { useNavigation, useRoute } from '@react-navigation/native';
+import { useNavigation, useRoute, useFocusEffect } from '@react-navigation/native';
 import API from '../../api';
 
 export default function ShowtimesScreen() {
@@ -18,7 +18,7 @@ export default function ShowtimesScreen() {
         }
     };
 
-    useEffect(() => { fetchShowtimes(); }, []);
+    useFocusEffect(useCallback(() => { fetchShowtimes(); }, [showId]));
 
     return (
         <View style={styles.container}>

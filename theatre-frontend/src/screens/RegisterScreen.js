@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, Alert, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import API from '../../api';
 
 export default function RegisterScreen() {
@@ -12,9 +13,9 @@ export default function RegisterScreen() {
     const handleRegister = async () => {
         try {
             await API.post('/register', { name, email, password });
-            Alert.alert('Επιτυχία!', 'Ο λογαριασμός δημιουργήθηκε', [
-                { text: 'OK', onPress: () => navigation.navigate('Login') }
-            ]);
+            const res = await API.post('/login', { email, password });
+            await AsyncStorage.setItem('token', res.data.token);
+            navigation.replace('Theatres');
         } catch (err) {
             Alert.alert('Σφάλμα', 'Η εγγραφή απέτυχε');
         }

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, FlatList, TouchableOpacity, Alert, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import API from '../../api';
 
 export default function ProfileScreen() {
@@ -31,8 +32,8 @@ export default function ProfileScreen() {
         ]);
     };
 
-    const handleLogout = () => {
-        localStorage.removeItem('token');
+    const handleLogout = async () => {
+        await AsyncStorage.removeItem('token');
         navigation.replace('Login');
     };
 
