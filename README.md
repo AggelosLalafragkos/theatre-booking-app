@@ -1,4 +1,3 @@
-[README.md](https://github.com/user-attachments/files/27027808/README.md)
 # 🎭 Theatre Booking App
 
 **Μάθημα:** Mobile & Distributed Systems (CN6035)  
@@ -173,6 +172,7 @@ npx expo start
 | Database | MariaDB |
 | Auth | JWT (jsonwebtoken), bcryptjs |
 | HTTP Client | Axios |
+| Storage | AsyncStorage (@react-native-async-storage) |
 
 ---
 
@@ -193,3 +193,15 @@ theatres ──→ shows ──→ showtimes ──→ reservations
 - Passwords αποθηκεύονται με **bcrypt hashing** (salt rounds: 10)
 - Authentication με **JWT tokens** (24h expiry)
 - Προστασία endpoints με **JWT Middleware**
+- Κρατήσεις με **database transactions** και `SELECT FOR UPDATE` για αποφυγή overbooking
+- Token αποθήκευση με **AsyncStorage** (React Native safe)
+
+---
+
+## 🔧 Διορθώσεις & Βελτιώσεις
+
+- **AsyncStorage** αντί `localStorage` για συμβατότητα με React Native (mobile)
+- **Database transactions** (`BEGIN` / `COMMIT` / `ROLLBACK`) στις κρατήσεις για ασφαλή ταυτόχρονη πρόσβαση
+- **Connection leak fix**: `finally { conn.release() }` σε όλους τους controllers
+- **Auto-login** μετά την εγγραφή — δεν χρειάζεται ξεχωριστό βήμα σύνδεσης
+- **Auto-refresh θέσεων** με `useFocusEffect` στο ShowtimesScreen κάθε φορά που επιστρέφει ο χρήστης
