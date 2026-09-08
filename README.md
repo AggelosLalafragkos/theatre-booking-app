@@ -5,10 +5,7 @@ A full-stack mobile app for booking theatre tickets, built as a three-tier distr
 **Highlights:** JWT authentication, database transactions to prevent seat overbooking, bcrypt password hashing, and a full booking flow from browsing shows to managing reservations.
 
 **Μάθημα:** Mobile & Distributed Systems (CN6035)  
-**Φοιτητής:** Aggelos Lalafragkos-Tolias  
-**Κωδικός Φοιτητή:** 2678441  
-
-Εφαρμογή κινητού για κράτηση θέσεων σε θεατρικές παραστάσεις. Υλοποιεί πλήρες κατανεμημένο σύστημα τριών επιπέδων (Frontend – Backend – Database).
+**Φοιτητής:** Aggelos Lalafragkos-Tolias    
 
 ---
 
